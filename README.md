@@ -9,6 +9,21 @@ Images built from this repository are used as bases for serving Drupal 8 website
    f1-ext-install pecl:memcached
    ```
 
+## PHP Versions and Tags
+
+- Currently supported by PHP:
+  - `7.3`, `7.3-xdebug`
+  - `7.2`, `7.2-xdebug`
+  - `7.1`, `7.1-xdebug`
+
+- End-of-life for legacy projects:
+  - `7.0`, `7.0-xdebug`
+  - `5.6`, `5.6-xdebug`
+
+Images tagged with `-xdebug` contain XDebug installed but disabled; at runtime use `docker-php-ext-enable xdebug` to enable.
+
+The tags `7`, `7-debug`, `5`, and `5-debug` are available for quick testing when a specific version isn't needed.
+
 # License
 
 Like the [base PHP image](https://github.com/docker-library/php) we use, this project is available under the terms of the MIT license. See [LICENSE](LICENSE) for more details.
