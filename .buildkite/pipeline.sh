@@ -44,9 +44,12 @@ create-step() {
     commands:
       - bash .buildkite/build.sh $version $minor ${php_versions[$version]}
     plugins:
-      - ecr#v2.0.0:
-          login: true
-          no_include_email: true
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            DOCKER_LOGIN_PASSWORD: buildkite/dockerhubid
+      - docker-login#v2.0.1:
+          username: f1builder
+          password-env: DOCKER_LOGIN_PASSWORD
 YAML
 }
 

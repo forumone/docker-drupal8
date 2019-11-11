@@ -8,3 +8,7 @@ Images built from this repository are used as bases for serving Drupal 8 website
    ```sh
    f1-ext-install pecl:memcached
    ```
+
+# License
+
+Like the [base PHP image](https://github.com/docker-library/php) we use, this project is available under the terms of the MIT license. See [LICENSE](LICENSE) for more details.
