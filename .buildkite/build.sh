@@ -69,7 +69,10 @@ build() {
     docker_args+=(--build-arg "$arg")
   done
 
-  docker build . --target "$target" "${docker_args[@]}"
+  docker build . \
+    --target "$target" \
+    --pull \
+    "${docker_args[@]}"
 }
 
 # Start by building the base image
