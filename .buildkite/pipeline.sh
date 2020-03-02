@@ -43,7 +43,7 @@ create-step() {
   - label: ":docker: :php: v$minor"
     env:
       XDEBUG_VERSION: "$xdebug"
-    concurrency: 3
+    concurrency: 5
     concurrency_group: "f1/docker"
     commands:
       - bash .buildkite/build.sh $version $minor ${php_versions[$version]}
