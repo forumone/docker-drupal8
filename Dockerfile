@@ -37,3 +37,14 @@ FROM base AS xdebug
 
 ARG XDEBUG_VERSION
 RUN f1-ext-install pecl:xdebug@${XDEBUG_VERSION}
+
+# Since this is a development-oriented image, we can reduce the parameters for
+# less-optimal behavior. This prevents issues where a file appears to be "stuck" in an old
+# version until opcache finally re-scans the updated file.
+#
+# We lower the revalidate frequency to 5 seconds - enough to cache files for a reload or
+# two, but not too long so as to stymie rapid iteration.
+
+RUN sed -i \
+  -e 's/revalidate_freq=60/revalidate_freq=5/' \
+  /usr/local/etc/php/conf.d/opcache-recommended.ini
