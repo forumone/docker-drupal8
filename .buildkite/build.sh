@@ -28,6 +28,10 @@ extra_tags=("$@")
 # in the function call.
 declare -a tags
 
+# Written to by the build() function. This array contains all of the tags we
+# will be pushing up once the build succeeds.
+declare -a built_tags
+
 # Usage: should-push
 #
 # This function determines if the built images should be pushed up to the Docker Hub.
@@ -49,9 +53,10 @@ should-push() {
 #
 # * target is either 'base' or 'xdebug' (see the Dockerfile)
 # * build-arg is of the form ARG_NAME=value, as expected by --build-arg
-# * tag-name is
+# * tag-name is a full Docker tag (repository:tag)
 #
 # NB. This function reads from the tags variable as well as its own arguments.
+# It also writes to the built_tags array.
 build() {
   local target="$1"
   shift
@@ -63,6 +68,7 @@ build() {
 
   for tag in "${tags[@]}"; do
     docker_args+=(--tag "$tag")
+    built_tags+=("$tag")
   done
 
   for arg in "${build_args[@]}"; do
@@ -95,6 +101,9 @@ done
 build xdebug PHP_VERSION="$version" XDEBUG_VERSION="$XDEBUG_VERSION"
 
 if should-push; then
-  echo "--- Push"
-  docker push "$repository"
+  echo "--- Push ${built_tags[*]}"
+
+  for tag in "${built_tags[@]}"; do
+    echo docker push "$tag"
+  done
 fi
