@@ -30,7 +30,7 @@ declare -A xdebug_overrides=(
   [7.2]=2.9.8
   [7.3]=2.9.8
   [7.4]=2.9.8
-  [8.0]=2.9.8
+  [8.0]=3.0.4
 )
 
 # Usage: create-step <version>
