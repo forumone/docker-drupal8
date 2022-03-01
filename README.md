@@ -6,7 +6,11 @@ Images built from this repository are used as bases for serving Drupal 8 website
 2. These images include a small utility, `f1-ext-install`, to simplify the task of installing common extensions. For example, to install Memcached, one only needs to add this to their Dockerfile:
 
    ```sh
-   f1-ext-install pecl:memcached
+    # Install the core SOAP extension
+    f1-ext-install builtin:soap
+
+    # Install memcached from PECL
+    f1-ext-install pecl:memcached
    ```
 
 ## PHP Versions and Tags
